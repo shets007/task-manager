@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get "/task/new", to: "task#new", as: :new_task
   get "/task/:id", to: "task#show", as: :task
-  patch "/task/:id", to: "task#udpate"
+  patch "/task/:id", to: "task#update", as: :update_task
   delete "/task/:id", to: "task#destroy"
   get "/task/:id/edit", to: "task#edit", as: :edit_task
   post "/task", to: "task#create", as: :tasks

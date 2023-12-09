@@ -1,19 +1,29 @@
-<%= form_with model: task do |form| %>
+<%= form_with model: task, class: "bg-white p-6 rounded shadow" do |form| %>
   <% if form.object.errors.any? %>
-    <div>
-      <% form.object.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+    <div class="mb-4">
+      <ul class="text-red-600">
+        <% form.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
-  <div>
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+
+  <div class="mb-4">
+    <%= form.label :body, class: "block text-gray-700 text-sm font-bold mb-2" do %>
+      Task Status
+      <%= form.select :body, ['Backlog', 'InProgress', 'Review', 'Deleted', 'Done'], { prompt: 'Task status' }, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" %>
+    <% end %>
   </div>
-  <%=form.button %>
+
+  <div class="flex items-center justify-between mb-4">
+    <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+  </div>
 <% end %>

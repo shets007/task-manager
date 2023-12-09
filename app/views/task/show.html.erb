@@ -1,5 +1,62 @@
-<%= link_to "Edit", edit_task_path(@task) if user_signed_in? %>
-<h1><%= @task.title %></h1>
-<%= @task.body %>
-<%= @task.created_at %>
-<%= @task.updated_at %>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        margin: 20px;
+    }
+
+    .task-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .edit-link {
+        margin-top: 10px;
+        display: block;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .edit-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="task-container">
+  <h1><%= @task.title %></h1>
+  <p><%= @task.body %></p>
+  <p class="task-user">Created by: <%= @task.user.email %></p>
+</div>
+<% if user_signed_in? && current_user == @task.user %>
+  <%= link_to "Edit", edit_task_path(@task), class: "edit-link" %>
+<% end %>

@@ -47,7 +47,7 @@ class TaskController  < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :body)
+    params.require(:task).permit(:title, :body, :user_id)
   end
 
   def authenticate_user!

@@ -1,12 +1,82 @@
-<h1>my task</h1>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        margin: 20px;
+    }
 
-<% @tasks.each do |task| %>
-  <p><%= link_to task.title, task %></p>
-  <p><%= task.body %></p>
-  <p><%= task.created_at %></p>
-  <p><%= task.updated_at %></p>
-<!--  <p><%#= link_to 'show', task_path(task) %></p>-->
-<!--  <p><%#= link_to 'edit', edit_task_path(task) %></p>-->
-<!--  <p><%#= link_to 'delete', task_path(task), method: :delete %></p>-->
-  <hr>
-<% end %>
+    h1 {
+        color: #333;
+    }
+
+    .tasks-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .task-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .task-title {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .task-body {
+        color: #555;
+    }
+
+    .task-user {
+        font-size: 14px;
+        color: #777;
+    }
+
+    .task-backlog {
+        background-color: #ffe5e5; /* Light red for Backlog */
+    }
+
+    .task-inprogress {
+        background-color: #fff3e6; /* Light orange for InProgress */
+    }
+
+    .task-review {
+        background-color: #e5f7fa; /* Light blue for Review */
+    }
+
+    .task-deleted {
+        background-color: #f8d7da; /* Light pink for Deleted */
+    }
+
+    .task-done {
+        background-color: #d4edda; /* Light green for Done */
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background-color: #ddd;
+        margin: 10px 0;
+    }
+</style>
+
+<h1>Task Board</h1>
+
+<div class="tasks-container">
+  <% @tasks.each do |task| %>
+    <div class="task-container <%= "task-#{task.body.downcase}" %>">
+      <p class="task-title"><%= link_to task.title, task %></p>
+      <p class="task-body"><%= task.body %></p>
+      <p class="task-user">Created by: <%= task.user.email %></p>
+    </div>
+    <hr>
+  <% end %>
+</div>
