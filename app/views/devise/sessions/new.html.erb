@@ -1,38 +1,95 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md w-full space-y-8">
-    <div>
-      <h2 class="text-center text-3xl font-extrabold text-gray-900">
-        Log in
-      </h2>
-    </div>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-8 space-y-6" }) do |f| %>
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <%= f.label :email, class: "sr-only" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %>
-        </div>
-        <div>
-          <%= f.label :password, class: "sr-only" %>
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %>
-        </div>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Add your custom styles here -->
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f7f7f7;
+          margin: 20px;
+          text-align: center;
+      }
 
-      <% if devise_mapping.rememberable? %>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
-            <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-              Remember me
-            </label>
-          </div>
-        </div>
-      <% end %>
+      h2 {
+          color: #333;
+          font-size: 24px;
+          margin-bottom: 20px;
+      }
 
-      <div>
-        <%= f.submit "Log in", class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-      </div>
-    <% end %>
+      .field {
+          margin-bottom: 15px;
+      }
 
-    <%= render "devise/shared/links" %>
+      label {
+          color: #555;
+          display: block;
+          margin-bottom: 5px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          box-sizing: border-box;
+      }
+
+      .actions {
+          margin-top: 15px;
+      }
+
+      input[type="submit"] {
+          background-color: #3498db;
+          color: #fff;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+      }
+
+      input[type="submit"]:hover {
+          background-color: #2980b9;
+      }
+
+      .remember-me {
+          margin-top: 10px;
+      }
+
+      /* Add more styles as needed */
+
+  </style>
+</head>
+<body>
+<h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-</div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field remember-me">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</body>
+</html>
