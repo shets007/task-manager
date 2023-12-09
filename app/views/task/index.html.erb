@@ -75,7 +75,7 @@
     <div class="task-container <%= "task-#{task.body.downcase}" %>">
       <p class="task-title"><%= link_to task.title, task %></p>
       <p class="task-body"><%= task.body %></p>
-      <p class="task-user">Created by: <%= task.user.email %></p>
+      <p class="task-user">Owner: <%= task.user.email %></p>
     </div>
     <hr>
   <% end %>

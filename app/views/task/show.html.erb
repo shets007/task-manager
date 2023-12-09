@@ -55,7 +55,7 @@
 <div class="task-container">
   <h1><%= @task.title %></h1>
   <p><%= @task.body %></p>
-  <p class="task-user">Created by: <%= @task.user.email %></p>
+  <p class="task-user">Owner: <%= @task.user.email %></p>
 </div>
 <% if user_signed_in? && current_user == @task.user %>
   <%= link_to "Edit", edit_task_path(@task), class: "edit-link" %>
