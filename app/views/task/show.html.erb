@@ -1,0 +1,5 @@
+<%= link_to "Edit", edit_task_path(@task) if user_signed_in? %>
+<h1><%= @task.title %></h1>
+<%= @task.body %>
+<%= @task.created_at %>
+<%= @task.updated_at %>
